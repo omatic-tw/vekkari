@@ -94,8 +94,8 @@ def clock_loop(epd, fonts):
         now = datetime.now()
         draw_clock_data(epd, fonts, now)
         now = datetime.now()
-        seconds_until_next_minute = 60 - now.time().second
-        time.sleep(seconds_until_next_minute)
+        seconds_until_next_refresh = 120 - now.time().second
+        time.sleep(seconds_until_next_refresh)
 
 def draw_clock_data(epd, fonts, datetime_now):
     datestring = datetime_now.strftime(DATEFORMAT).capitalize()
@@ -160,18 +160,18 @@ def fn_ip_show(epd, fonts, frame_black, frame_red):
             epd.draw_string_at(frame_red, 20, 120, 'Eth0 ha no address.', fonts.datafont, COLORED)
 
         if fn_intf_is_avail(mgmt_intf_wlan1) is False:
-            epd.draw_string_at(frame_red, 20, 135, mgmt_intf_wlan1+' not exist', fonts.datafont, COLORED)
+            epd.draw_string_at(frame_red, 20, 140, mgmt_intf_wlan1+' not exist', fonts.datafont, COLORED)
         elif fn_intf_is_linkup(mgmt_intf_wlan1) is False:
-            epd.draw_string_at(frame_red, 20, 135, mgmt_intf_wlan1+' link-down', fonts.datafont, COLORED)
+            epd.draw_string_at(frame_red, 20, 140, mgmt_intf_wlan1+' link-down', fonts.datafont, COLORED)
         else:
             addr_info_wlan1 = netifaces.ifaddresses(mgmt_intf_wlan1)
             if netifaces.AF_INET in addr_info_wlan1.keys():
                 ip_addr_wlan1 = addr_info_wlan1[netifaces.AF_INET][0]['addr']
-                epd.draw_string_at(frame_black, 20, 135, 'Wlan2 : ', fonts.datafont, COLORED)
-                epd.draw_string_at(frame_red, 110, 135, ip_addr_wlan1, fonts.datafont, COLORED)
+                epd.draw_string_at(frame_black, 20, 140, 'Wlan2 : ', fonts.datafont, COLORED)
+                epd.draw_string_at(frame_red, 110, 140, ip_addr_wlan1, fonts.datafont, COLORED)
 
             else:
-                epd.draw_string_at(frame_red, 20, 135, 'Wlan2 has no address.', fonts.datafont, COLORED)
+                epd.draw_string_at(frame_red, 20, 140, 'Wlan2 has no address.', fonts.datafont, COLORED)
 
 
 
