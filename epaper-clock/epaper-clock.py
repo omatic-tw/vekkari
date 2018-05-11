@@ -119,7 +119,7 @@ def read_button4_for_shutdown():
 
 # management interface name
 mgmt_intf = 'eth0'
-mgmt_intf_wlan1 = 'wlan1'
+mgmt_intf_wlan1 = 'wlan2'
 mgmt_intf_ip_addr = ['192', '168', '000', '001']
 mgmt_intf_prefix = 24
 
@@ -154,8 +154,8 @@ def fn_ip_show(epd, fonts, frame_black, frame_red):
         if netifaces.AF_INET in addr_info.keys():
             ip_addr = addr_info[netifaces.AF_INET][0]['addr']
             netmask = addr_info[netifaces.AF_INET][0]['netmask']
-            epd.draw_string_at(frame_black, 20, 120, 'Eth0 : ', fonts.datafont, COLORED)
-            epd.draw_string_at(frame_red, 100, 120, ip_addr, fonts.datafont, COLORED)
+            epd.draw_string_at(frame_black, 20, 120, 'Eth0  : ', fonts.datafont, COLORED)
+            epd.draw_string_at(frame_red, 110, 120, ip_addr, fonts.datafont, COLORED)
         else:
             epd.draw_string_at(frame_red, 20, 120, 'Eth0 ha no address.', fonts.datafont, COLORED)
 
@@ -167,11 +167,11 @@ def fn_ip_show(epd, fonts, frame_black, frame_red):
             addr_info_wlan1 = netifaces.ifaddresses(mgmt_intf_wlan1)
             if netifaces.AF_INET in addr_info_wlan1.keys():
                 ip_addr_wlan1 = addr_info_wlan1[netifaces.AF_INET][0]['addr']
-                epd.draw_string_at(frame_black, 20, 120, 'Wlan0 : ', fonts.datafont, COLORED)
-                epd.draw_string_at(frame_red, 100, 135, ip_addr_wlan1, fonts.datafont, COLORED)
+                epd.draw_string_at(frame_black, 20, 135, 'Wlan2 : ', fonts.datafont, COLORED)
+                epd.draw_string_at(frame_red, 110, 135, ip_addr_wlan1, fonts.datafont, COLORED)
 
             else:
-                epd.draw_string_at(frame_red, 20, 135, 'Wlan0 has no address.', fonts.datafont, COLORED)
+                epd.draw_string_at(frame_red, 20, 135, 'Wlan2 has no address.', fonts.datafont, COLORED)
 
 
 
