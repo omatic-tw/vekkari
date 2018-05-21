@@ -160,7 +160,7 @@ def fn_ip_show(epd, fonts, frame_black, frame_red):
             epd.draw_string_at(frame_black, 20, 120, 'Eth0  : ', fonts.datafont, COLORED)
             epd.draw_string_at(frame_red, 110, 120, ip_addr, fonts.datafont, COLORED)
         else:
-            epd.draw_string_at(frame_red, 20, 120, 'Eth0 ha no address.', fonts.datafont, COLORED)
+            epd.draw_string_at(frame_red, 20, 120, 'Eth0 has no address.', fonts.datafont, COLORED)
 
 
     if fn_intf_is_avail(mgmt_intf_wlan1) is False:
