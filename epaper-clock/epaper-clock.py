@@ -61,6 +61,7 @@ from datetime import datetime
 import time
 import locale
 import subprocess
+import socket
 
 COLORED = 1
 UNCOLORED = 0
@@ -84,7 +85,7 @@ def main():
     epd.init()
     epd.set_rotate(epd2in7b.ROTATE_270)
 
-    fonts = Fonts(timefont_size = 60, datefont_size = 20, datafont_size = 20)
+    fonts = Fonts(timefont_size = 40, datefont_size = 20, datafont_size = 20)
 
     read_button4_for_shutdown()
     clock_loop(epd, fonts)
@@ -100,14 +101,16 @@ def clock_loop(epd, fonts):
 def draw_clock_data(epd, fonts, datetime_now):
     datestring = datetime_now.strftime(DATEFORMAT).capitalize()
     timestring = datetime_now.strftime(TIMEFORMAT)
+    hoststring = socket.gethostname()
 
     # Create frame buffers
     frame_black = [0] * (epd.width * epd.height / 8)
     frame_red = [0] * (epd.width * epd.height / 8)
 
-    epd.draw_string_at(frame_black, 20, 10, timestring, fonts.timefont, COLORED)
-    epd.draw_string_at(frame_red, 20, 70, datestring, fonts.datefont, COLORED)
-    epd.draw_string_at(frame_black, 20, 90, "Jeremy Wu", fonts.datafont, COLORED)
+    epd.draw_string_at(frame_black, 20, 0, timestring, fonts.timefont, COLORED)
+    epd.draw_string_at(frame_red, 20, 40, datestring, fonts.datefont, COLORED)
+    epd.draw_string_at(frame_black, 20, 65, hoststring, fonts.datafont, COLORED)
+    epd.draw_string_at(frame_black, 20, 90, "Owner : Jeremy Wu", fonts.datafont, COLORED)
     fn_ip_show(epd, fonts, frame_black, frame_red)
     epd.display_frame(frame_black, frame_red)
 
